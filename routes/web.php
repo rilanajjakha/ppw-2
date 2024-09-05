@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\Posts2Controller;
+
+Route::get('/posts', [PostController:: class, 'index']);
+Route::get('/posts2', [Posts2Controller:: class, 'index']);
+
 
 Route::get('/', function () {
     return view('pages.home');
@@ -23,4 +29,4 @@ Route::get('/isi', function () {
 });
 
 /**pertemuan ke4 controller dan migration */
-Route::get('/posts', [PostController:: class, 'index']);
+/**Route::get('/posts', [PostController:: class, 'index']); */
