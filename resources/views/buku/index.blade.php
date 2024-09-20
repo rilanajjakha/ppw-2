@@ -8,16 +8,17 @@
            rel="stylesheet">
 </head>
 <body>
+    <a href="{{ route('buku.create') }}" class="btn btn-primary float-end">Tambah Buku</a>
     <div class="container mt-4">
         <table class="table table-striped table-hover table-bordered">
             <thead class="table-dark">
                 <tr>
-                    <th>No</th>
-                    <th>Judul buku</th>
-                    <th>Penulis</th>
-                    <th>Harga</th>
-                    <th>Tanggal Terbit</th>
-                    <th>Aksi</th>
+                    <th class="text-center">No</th>
+                    <th class="text-center">Judul buku</th>
+                    <th class="text-center">Penulis</th>
+                    <th class="text-center">Harga</th>
+                    <th class="text-center">Tanggal Terbit</th>
+                    <th class="text-center">Aksi</th>
                 </tr>    
             </thead>
             <tbody>
@@ -28,7 +29,22 @@
                         <td>{{ $buku->penulis }}</td>
                         <td>{{ "Rp. ".number_format($buku->harga, 2, ',', '.') }}</td>
                         <td>{{ \Carbon\Carbon::parse($buku->tgl_terbit)->format('d-m-Y') }}</td>
-                        <td>Aksi</td>
+                        <td>
+                            <div class="btn-group">
+                                <form action="{{ route('buku.update', $buku->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <a href="{{ route('buku.edit', $buku->id) }}" 
+                                        class="btn btn-warning">Edit</a>
+                                </form>
+                                <form action="{{ route('buku.destroy', $buku->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button onclick="return confirm('Yakin mau dihapus?')" type="submit" 
+                                        class="btn btn-danger">Hapus</button>
+                                </form>
+                            </div>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>   
@@ -53,5 +69,6 @@
             </div>
         </div>
     </div>
+    <br>
 </body>
 </html>
