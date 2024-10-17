@@ -6,13 +6,18 @@ use App\Models\Buku;
 
 class BukuController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index() {
         $data_buku = Buku::all();
 
         $jumlah_buku = $data_buku->count();
         $total_harga = $data_buku->sum('harga');
 
-        return view('buku.index', compact('data_buku', 'jumlah_buku', 'total_harga'));
+        return view('auth.dashboard', compact('data_buku', 'jumlah_buku', 'total_harga'));
     }
 
     public function create() {
@@ -30,9 +35,6 @@ class BukuController extends Controller
         return redirect('/buku');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id) {
         //
     }
@@ -60,3 +62,4 @@ class BukuController extends Controller
         return redirect('/buku');
     }
 }
+

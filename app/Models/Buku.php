@@ -11,4 +11,3 @@ class Buku extends Model
 
     protected $table = 'books';
 }
-
