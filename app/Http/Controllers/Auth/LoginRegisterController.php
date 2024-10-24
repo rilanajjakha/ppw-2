@@ -55,17 +55,25 @@ class LoginRegisterController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
-
+    
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('dashboard')
-                ->withSuccess('You have successfully logged in!');
+    
+            // Cek level user dan arahkan berdasarkan level
+            if (auth()->user()->level === 'admin') {
+                return redirect()->route('dashboard')
+                    ->withSuccess('You have successfully logged in as admin!');
+            } else {
+                return redirect()->route('auth.home')
+                    ->withError('Anda bukan admin!');
+            }
         }
-
+    
         return back()->withErrors([
             'email' => 'Your provided credentials do not match in our records.'
         ])->onlyInput('email');
     }
+    
 
     public function dashboard()
     {
@@ -89,9 +97,3 @@ class LoginRegisterController extends Controller
             ->withSuccess('You have logged out successfully!');
     }
 }
-
-
-
-
-
-

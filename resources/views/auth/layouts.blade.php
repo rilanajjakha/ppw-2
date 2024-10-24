@@ -6,6 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Laravel 10 Custom User Registration & Login Tutorial</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .alert-danger {
+            background-color: #f2dede;
+            border-color: #ebccdl;
+            color: #a94442;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-light">
