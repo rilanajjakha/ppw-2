@@ -28,9 +28,11 @@
                             <th class="text-center">Penulis</th>
                             <th class="text-center">Harga</th>
                             <th class="text-center">Tanggal Terbit</th>
+                            <th class="text-center">Gambar</th> 
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         @foreach($data_buku as $index => $buku)
                             <tr>
@@ -40,15 +42,20 @@
                                 <td>{{ "Rp. " . number_format($buku->harga, 2, ',', '.') }}</td>
                                 <td>{{ \Carbon\Carbon::parse($buku->tgl_terbit)->format('d-m-Y') }}</td>
                                 <td class="text-center">
+                                    @if($buku->photo)
+                                        <img src="{{ asset('storage/' . $buku->photo) }}" 
+                                        alt="Gambar Buku" width="200">
+                                    @else
+                                        <span>Tidak ada gambar</span>
+                                    @endif
+                                </td>
+                                <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="{{ route('buku.edit', $buku->id) }}" class="btn btn-warning">
-                                            Edit</a>
-                                        <form action="{{ route('buku.destroy', $buku->id) }}" method="POST" 
-                                            class="d-inline">
+                                        <a href="{{ route('buku.edit', $buku->id) }}" class="btn btn-warning">Edit</a>
+                                        <form action="{{ route('buku.destroy', $buku->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button onclick="return confirm('Yakin mau dihapus?')" type="submit" 
-                                            class="btn btn-danger">Hapus</button>
+                                            <button onclick="return confirm('Yakin mau dihapus?')" type="submit" class="btn btn-danger">Hapus</button>
                                         </form>
                                     </div>
                                 </td>
