@@ -5,6 +5,9 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\Posts2Controller;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\Auth\LoginRegisterController;
+use App\Http\Controllers\GalleryController;
+
+Route::resource('gallery', GalleryController::class);
 
 // age
 Route::get('restricted', function() {
