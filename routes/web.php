@@ -6,6 +6,10 @@ use App\Http\Controllers\Posts2Controller;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\SendEmailController;
+
+Route::get('/send-mail', [SendEmailController::class,'index'])->name('kirim-email');
+Route::post('/post-email', [SendEmailController::class,'store'])->name('post-email');
 
 Route::resource('gallery', GalleryController::class);
 
